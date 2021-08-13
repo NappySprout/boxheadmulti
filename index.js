@@ -18,6 +18,7 @@ class Character {
       this.socketIndex = socketIndex 
       this.invi = false
       this.health = 10
+      this.charspeed = 3
     }
     move(){
         this.pos = this.pos.map((d,index)=>d+this.speed[index])
@@ -32,11 +33,10 @@ class Character {
     }
     setSpeed(map){
         if (this.health===0)return;
-        const thing = 3
         const vert = map["s"]-map["w"]
         const hori = map["d"]-map["a"]   
         if (hori!=0 || vert !=0){this.direction = [hori,vert]}
-        this.speed = [hori*thing,vert*thing]     
+        this.speed = [hori*this.charspeed,vert*this.charspeed]     
     }
     isCollide(char){
         return char.pos.map((d,index)=>  (d-this.pos[index])**2  ).reduce((a, b) => a + b, 0) <= (char.rad + this.rad)**2 
